@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Field, withFormik } from "formik"; //withFormik hooks Form component with Formik backend and passes state variables down as props
 import * as yup from "yup"; // import all stuff in yup and bundle into object called yup
-// import axios from "axios";
+import axios from "axios";
 
 // step 1 - created formik form
 const FormComponent = props => {
@@ -56,12 +56,18 @@ const FormikForm = withFormik({
       .boolean()
       .oneOf([true], "You must agree to the terms of service.")
       .required()
-  })
-  // step 3 - make a POST request
-  // Submit
-  // handleSubmit: (values, { resetForm }) => {
-  //   axios.post("https://reqres.in/api/users");
-  // }
+  }),
+  // step 3 - make a POST request to submit form data
+  // won't submit until the yup restraints are met
+  handleSubmit: (values, { resetForm }) => {
+    axios
+      .post("https://reqres.in/api/users", values)
+      .then(res => {
+        console.log(res);
+        resetForm(); // why doesn't this reset the checked box?
+      })
+      .catch(error => console.error(error));
+  }
 })(FormComponent); // HOC - component that accepts a component as an argument. Similar to Route, which takes component as arg
 
 export default FormikForm;
