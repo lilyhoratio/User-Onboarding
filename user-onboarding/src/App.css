@@ -16,7 +16,7 @@ form {
 input {
   outline: none; /* remove blue outline when curser inside */
   width: 50%;
-  margin: 20px 0;
+  margin: 10px 0;
   padding: 10px;
   border-radius: 5px;
   border: none;
@@ -45,4 +45,8 @@ button {
 
 label {
   font-size: 0.8rem;
+}
+
+p {
+  font-size: 0.5rem;
 }

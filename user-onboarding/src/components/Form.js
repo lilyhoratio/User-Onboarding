@@ -5,28 +5,23 @@ import * as yup from "yup"; // import all stuff in yup and bundle into object ca
 
 // step 1 - created formik form
 const FormComponent = props => {
-  console.log(props.values);
-  console.log(props.errors);
-  console.log(props.touched);
-  // const {values, touched, errors} = props
+  // console.log(props.values);
+  // console.log(props.errors);
+  // console.log(props.touched);
+  const { values, touched, errors } = props;
+
   return (
     <Form>
-      {props.touched.name && props.errors.name && (
-        <p className="error">{props.errors.name}</p>
-      )}
+      {touched.name && errors.name && <p className="error">{errors.name}</p>}
       <Field type="text" name="name" placeholder="name" />
-      {props.touched.email && props.errors.email && (
-        <p className="error">{props.errors.email}</p>
-      )}
+      {touched.email && errors.email && <p className="error">{errors.email}</p>}
       <Field type="email" name="email" placeholder="email" />
       {/* ^^^ why is this being weird when commented out? */}
-      {props.touched.password && props.errors.password && (
-        <p className="error">{props.errors.password}</p>
+      {touched.password && errors.password && (
+        <p className="error">{errors.password}</p>
       )}
       <Field type="password" name="password" placeholder="password" />
-      {props.touched.terms && props.errors.terms && (
-        <p className="error">{props.errors.terms}</p>
-      )}
+      {touched.terms && errors.terms && <p className="error">{errors.terms}</p>}
       <label>
         <Field type="checkbox" name="terms" />
         Agree to Terms
