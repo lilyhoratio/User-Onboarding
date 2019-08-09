@@ -1,14 +1,23 @@
-import React from "react";
-import { Form, Field, withFormik } from "formik"; //withFormik hooks Form component with Formik backend and passes state variables down as props
+import React, { useState, useEffect } from "react";
+import { Form, Field, withFormik, setNestedObjectValues } from "formik"; //withFormik hooks Form component with Formik backend and passes state variables down as props
 import * as yup from "yup"; // import all stuff in yup and bundle into object called yup
 import axios from "axios";
 
 // step 1 - created formik form
 const FormComponent = props => {
+  console.log(props); // why does this show status undefined?
   // console.log(props.values);
   // console.log(props.errors);
   // console.log(props.touched);
-  const { values, touched, errors } = props;
+  const { values, touched, errors, status } = props;
+
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    if (status) {
+      setUsers([...users, status]);
+    }
+  }, [status, users]);
 
   return (
     <Form>
@@ -27,6 +36,13 @@ const FormComponent = props => {
         Agree to Terms
       </label>
       <button type="submit">Submit</button>
+      {users.map(user => {
+        return (
+          <div>
+            <p>{user.name}</p>
+          </div>
+        );
+      })}
     </Form>
   );
 };
@@ -59,11 +75,12 @@ const FormikForm = withFormik({
   }),
   // step 3 - make a POST request to submit form data
   // won't submit until the yup restraints are met
-  handleSubmit: (values, { resetForm }) => {
+  handleSubmit: (values, { resetForm, setStatus }) => {
     axios
       .post("https://reqres.in/api/users", values)
       .then(res => {
         console.log(res);
+        setStatus(res);
         resetForm(); // why doesn't this reset the checked box?
       })
       .catch(error => console.error(error));
