@@ -1,0 +1,56 @@
+.App {
+  text-align: center;
+}
+
+form {
+  max-width: 500px;
+  padding: 10px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #cce3de;
+  border-radius: 5px;
+}
+
+input {
+  outline: none; /* remove blue outline when curser inside */
+  width: 50%;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+input.error {
+  border: pink;
+}
+
+label {
+  width: 120px;
+  display: flex;
+  text-align: right;
+  align-items: center;
+  justify-content: space-around;
+}
+
+label input {
+  opacity: 0.6;
+  width: auto;
+}
+
+button {
+  border-radius: 5px;
+  font-size: 1rem;
+  border: none;
+  margin-bottom: 15px;
+  padding: 5px 10px;
+}
+
+label {
+  font-size: 0.8rem;
+}
+
+p {
+  font-size: 0.5rem;
+}
